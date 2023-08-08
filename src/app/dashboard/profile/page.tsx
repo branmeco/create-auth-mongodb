@@ -1,26 +1,36 @@
-"use client"
+"use client";
+import { useSession, signOut } from "next-auth/react";
 
-import {useSession} from 'next-auth/react'
+function ProfilePage() {
+  const { data: session, status } = useSession();
 
-function ProfilePage(){
+  console.log(session, status);
 
-    const {data: session, status} = useSession();
+  return (
+    <div className="h-[calc(100vh-4rem)] flex flex-col gap-y-10 items-center justify-center">
+      <h1 className="font-bold text-3xl">Profile</h1>
 
-    console.log(session, status);
+      <pre className="bg-zinc-800 p-4">
+        {JSON.stringify(
+          {
+            session,
+            status,
+          },
+          null,
+          2
+        )}
+      </pre>
 
-    return (
-        <div>
-            <h1>Profile</h1>
-            <pre>
-                {
-                    JSON.stringify({
-                        session,
-                        status
-                    }, null, 2)
-                }
-            </pre>
-        </div>
-    )
+      <button
+        className="bg-zinc-800 px-4 py-2 block mb-2"
+        onClick={() => {
+          signOut();
+        }}
+      >
+        Signout
+      </button>
+    </div>
+  );
 }
 
 export default ProfilePage;

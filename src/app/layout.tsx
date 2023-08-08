@@ -1,5 +1,6 @@
 import './globals.css'
 import Providers from './Providers'
+import Navbar from '@/components/Navbar'
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,7 +15,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          <div className='container mx-auto'>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   )
